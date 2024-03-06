@@ -21,6 +21,7 @@ async def load_photo_hander(msg: Message, bot: Bot) -> None:
     path = f'./downloads/{msg.from_user.id}.jpg'
     await msg.bot.download(file=msg.photo[-1].file_id, destination=path)
     convertor = Convertor(path)
+
     flag = convertor.to_csv()
     if (flag):
         await bot.send_document(msg.chat.id,

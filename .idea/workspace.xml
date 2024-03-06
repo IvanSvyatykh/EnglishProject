@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d97c40e-dcf3-4d3d-bce2-6913078ffdaa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pythonProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/text.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handlers/photo_handler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Convertor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/extractor/OcrToTableTool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/extractor/TableExtractor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/extractor/TableLinesRemover.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/extractor/__init__.py" afterDir="false" />
+    <list default="true" id="9d97c40e-dcf3-4d3d-bce2-6913078ffdaa" name="Changes" comment="косячит с буквами">
+      <change beforePath="$PROJECT_DIR$/handlers/photo_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/photo_handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,18 +31,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Convertor.executor": "Debug",
-    "Python.TableCreator.executor": "Debug",
-    "Python.main.executor": "Run",
-    "Python.photo_handler.executor": "Run",
-    "Python.table_creator.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Convertor.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.TableCreator.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.photo_handler.executor&quot;: &quot;Run&quot;,
+    &quot;Python.table_creator.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/model/extractor" />
@@ -79,6 +65,30 @@
       <option name="presentableId" value="Default" />
       <updated>1709445990187</updated>
     </task>
+    <task id="LOCAL-00001" summary="косячит с буквами">
+      <option name="closed" value="true" />
+      <created>1709737605879</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709737605879</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="косячит с буквами" />
+    <option name="LAST_COMMIT_MESSAGE" value="косячит с буквами" />
   </component>
 </project>

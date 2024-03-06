@@ -1,25 +1,49 @@
-import cv2
+import os
+from typing import Tuple
 
-from model.extractor import OcrToTableTool as ottt, TableExtractor as te, TableLinesRemover as tlr
+import pandas as pd
+from img2table.document import Image
+from img2table.ocr import TesseractOCR
 
 
 class Convertor():
     def __init__(self, path: str):
         self.path = path
 
-    def to_csv(self) -> None:
-        path_to_image = self.path
-        table_extractor = te.TableExtractor(path_to_image)
-        perspective_corrected_image = table_extractor.execute()
-        cv2.imshow("perspective_corrected_image", perspective_corrected_image)
+    def __column_to_array(self, arr: list):
+        result = []
+        for i in range(len(arr)):
+            temp = arr[i]
+            try:
+                temp = temp.split('\n')
+                float_array = [float(string.replace(',', '.')) for string in temp]
+                temp = float_array
+            except:
+                pass
+            result += temp
+        return result
 
-        lines_remover = tlr.TableLinesRemover(perspective_corrected_image)
-        image_without_lines = lines_remover.execute()
-        cv2.imshow("image_without_lines", image_without_lines)
+    def __normalize_columns(self, dic: dict) -> Tuple:
+        max_length = max(map(len, dic.values()))
+        flag = True
+        for i in dic.keys():
+            for j in range(0, abs(len(dic[i]) - max_length)):
+                dic[i].append(0)
+                flag = False
+        return dic, flag
 
-        ocr_tool = ottt.OcrToTableTool(image_without_lines, perspective_corrected_image,
-                                       self.path.replace('.jpg', '.csv'))
-        ocr_tool.execute()
+    def to_csv(self) -> bool:
+        image = Image(self.path)
+        ocr = TesseractOCR(lang="eng")
+        imgage_tables = image.extract_tables(ocr=ocr)
+        dic = {}
+        for i in imgage_tables[0].df:
+            dic[i] = self.__column_to_array(imgage_tables[0].df[i].tolist())
+        dic, flag = self.__normalize_columns(dic)
+        df = pd.DataFrame(dic)
+        df.to_csv(self.path.replace('.jpg', '.csv'), index=False)
+        return True
 
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+    def remove_file(self):
+        os.remove(self.path)
+        os.remove(self.path.replace('.jpg', '.csv'))

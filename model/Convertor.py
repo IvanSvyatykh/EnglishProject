@@ -6,7 +6,7 @@ from img2table.document import Image
 from img2table.ocr import TesseractOCR
 
 
-class Convertor():
+class Convertor:
     def __init__(self, path: str):
         self.path = path
 
@@ -15,12 +15,13 @@ class Convertor():
         for i in range(len(arr)):
             temp = arr[i]
             try:
-                temp = temp.split('\n')
-                float_array = [float(string.replace(',', '.')) for string in temp]
+                temp = temp.split("\n")
+                float_array = [float(string.replace(",", ".")) for string in temp]
                 temp = float_array
+                result += temp
             except:
                 pass
-            result += temp
+
         return result
 
     def __normalize_columns(self, dic: dict) -> Tuple:
@@ -32,18 +33,20 @@ class Convertor():
                 flag = False
         return dic, flag
 
-    def to_csv(self) -> bool:
+    def to_csv(self) -> int:
         image = Image(self.path)
         ocr = TesseractOCR(lang="eng")
         imgage_tables = image.extract_tables(ocr=ocr)
         dic = {}
+        if len(imgage_tables) < 1:
+            return -1
         for i in imgage_tables[0].df:
             dic[i] = self.__column_to_array(imgage_tables[0].df[i].tolist())
         dic, flag = self.__normalize_columns(dic)
         df = pd.DataFrame(dic)
-        df.to_csv(self.path.replace('.jpg', '.csv'), index=False)
-        return True
+        df.to_csv(self.path.replace(".jpg", ".csv"), index=False)
+        return 1 if flag else 0
 
     def remove_file(self):
         os.remove(self.path)
-        os.remove(self.path.replace('.jpg', '.csv'))
+        os.remove(self.path.replace(".jpg", ".csv"))

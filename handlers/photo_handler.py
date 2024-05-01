@@ -18,19 +18,23 @@ async def start_handler(msg: Message) -> None:
 
 @router.message(F.photo)
 async def load_photo_hander(msg: Message, bot: Bot) -> None:
-    path = f'./downloads/{msg.from_user.id}.jpg'
+    path = f"./downloads/{msg.from_user.id}.jpg"
     await msg.bot.download(file=msg.photo[-1].file_id, destination=path)
     convertor = Convertor(path)
 
     flag = convertor.to_csv()
-    if (flag):
-        await bot.send_document(msg.chat.id,
-                                caption="Внимание бот смог разобрать фото не полностью! Колонки, где не хватает элементов содержат 0 в конце. Внимательно проверьте колонки на пропущенные запятые!",
-                                document=FSInputFile(
-                                    path=path.replace('.jpg', '.csv')))
-    else:
-        await bot.send_document(msg.chat.id,
-                                caption="Внимательно проверьте колонки на пропущенные запятые!",
-                                document=FSInputFile(
-                                    path=path.replace('.jpg', '.csv')))
+    if flag == -1:
+        await msg.answer(text="К сожалению, я ничего не смог разобрать на фото")
+    if flag == 0:
+        await bot.send_document(
+            msg.chat.id,
+            caption="Внимание бот смог разобрать фото не полностью! Колонки, где не хватает элементов содержат 0 в конце. Внимательно проверьте колонки на пропущенные запятые!",
+            document=FSInputFile(path=path.replace(".jpg", ".csv")),
+        )
+    if flag == 1:
+        await bot.send_document(
+            msg.chat.id,
+            caption="Внимательно проверьте колонки на пропущенные запятые!",
+            document=FSInputFile(path=path.replace(".jpg", ".csv")),
+        )
     convertor.remove_file()
